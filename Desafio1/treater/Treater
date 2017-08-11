@@ -1,0 +1,38 @@
+<?php
+
+	require_once("Request.php");
+	require_once("Validator.php");
+
+
+	class Treater {
+
+
+	public function jsonRequestMethod(){
+
+	$request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST']);
+
+	$validator = new Validator();
+
+	
+
+	if($validator ->validatorRequest($request->getMethod()) == true){
+
+	json_encode(array("Code" => 200,"Message" => "TUDO CERTO"));
+
+}else{
+
+	json_encode(array("Code" =>404,"Message" => " ERRO 404: NAO ENCONTRADO"));
+}
+}
+
+	public function jsonHHTPProtocol(){
+
+	if($validator ->validatorHTTP($request -> getProtocol()) == true){
+
+	json_encode(array("Code" => 403,"Message" => "Nao disponivel"));
+
+}
+}
+
+
+}
